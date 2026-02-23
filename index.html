@@ -7,57 +7,339 @@
     <title>Assignment 04</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- === tailwind + DaisyUI ==== -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <!-- === tailwind Csss ==== -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- === Google Fonts === -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
     <!-- ==== vanila css style === -->
     <style>
         * {
-            font-family: "Inter", sans-serif;
+            font-family: "Geist", sans-serif;
         }
     </style>
+
+    <link rel="stylesheet" href="tailwind.init.css">
 </head>
 
-<body class="max-w-screen-lg bg-base-200 mx-auto">
+<body class="mx-auto bg-[#F8FAFC] w-[80%]">
 
-    <header class="mx-auto  my-[60px]">
-        <h2 class="text-black text-2xl font-bold mb-4">Job Application Tracker</h2>
-        <div class="dashboard-card-container  grid grid-cols-3 gap-4">
-            <div class="dashboard-card rounded-2xl shadow bg-white p-5">
+    <header class="mx-auto my-10">
+        <h1 class="text-black text-2xl font-bold mb-4">Job Application Tracker</h1>
+
+        <div class="dashboard-card-container grid grid-cols-3 gap-4">
+            <div class="dashboard-card rounded-2xl shadow  p-5">
                 <p>Total</p>
-                <h1 class="text-black text-2xl font-bold">8</h1>
+                <h1 class="text-black text-2xl font-bold" id="total-count">0</h1>
             </div>
-            <div class="dashboard-card rounded-2xl shadow bg-white p-5">
+            <div class="dashboard-card rounded-2xl shadow p-5">
                 <p>Interview</p>
-                <h1 class="text-green-800 text-2xl font-bold">0</h1>
+                <h1 class="text-green-800 text-2xl font-bold" id="interview-count">0</h1>
             </div>
-            <div class="dashboard-card rounded-2xl shadow bg-white p-5">
+            <div class="dashboard-card rounded-2xl shadow p-5">
                 <p>Rejected</p>
-                <h1 class="text-red-800 text-2xl font-bold">0</h1>
+                <h1 class="text-red-800 text-2xl font-bold" id="rejected-count">0</h1>
             </div>
         </div>
     </header>
 
+    <main id="main" class="main-container mx-auto space-y-5">
 
-    <section>
+        <!-- === availble counter === -->
         <div class="counter-head flex items-center justify-between mb-6">
             <h1 class="text-xl font-bold text-black">Available Jobs</h1>
             <p>8 Jobs</p>
         </div>
-        <div class="counter-btn-container">
-            <button class="btn py-2 px-9">All</button>
-            <button class="btn py-2 px-3">Interview</button>
-            <button class="btn py-2 px-3">Rejected</button>
-        </div>
-    </section>
 
+        <!-- ===== toggle button section ==== -->
+        <div class="counter-btn-container flex gap-4 items-center">
+            <button id="total-filter-btn"     onclick="toggleStyle('total-filter-btn')" class="py-2 px-9 shadow rounded-sm text-white bg-blue-500">All</button>
+            <button id="interview-filter-btn" onclick="toggleStyle('interview-filter-btn')" class="py-2 px-4 shadow rounded-sm text-gray-600">Interview</button>
+            <button id="rejected-filter-btn"  onclick="toggleStyle('rejected-filter-btn')"  class="py-2 px-4 shadow rounded-sm text-gray-600">Rejected</button>
+        </div>
+
+        <!-- ==== Filtered Section === -->
+        <section id="interview-section">
+
+        </section>
+
+        <!-- ===== Allcards Section ==== -->
+        <section id="all-cards" class="space-y-6 mb-14">
+
+
+            <!-- === card - 01===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">Mobile First Corp</p>
+                        <p class="text-gray-600">React Native Developer</p>
+                        <p class="text-gray-600">Remote • Full-time • $130,000 - $175,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Build cross-platform mobile applications using React Native. Work on
+                            products used
+                            by millions of users worldwide.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 02 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">WebFlow Agency</p>
+                        <p class="text-gray-600">Web Designer & Developer</p>
+                        <p class="text-gray-600">Los Angeles, CA • Part-time • $80,000 - $120,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Create stunning web experiences for high-profile clients. Must have
+                            portfolio and experience with modern web design trends.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 03 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">DataViz Solutions</p>
+                        <p class="text-gray-600">Data Visualization Specialist</p>
+                        <p class="text-gray-600">Boston, MA • Full-time • $125,000 - $165,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Transform complex data into compelling visualizations. Required skills:
+                            D3.js, React, and strong analytical thinking.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 04 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">CloudFirst Inc</p>
+                        <p class="text-gray-600">Backend Developer</p>
+                        <p class="text-gray-600">Seattle, WA • Full-time • $140,000 - $190,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Design and maintain scalable backend systems using Python and AWS. Work
+                            with modern DevOps practices and cloud infrastructure.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 05 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">Innovation Labs</p>
+                        <p class="text-gray-600">UI/UX Engineer</p>
+                        <p class="text-gray-600">Austin, TX • Full-time • $110,000 - $150,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Create beautiful and functional user interfaces for our suite of
+                            products. Strong design skills and frontend development expertise required.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 06 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">MegaCorp Solutions</p>
+                        <p class="text-gray-600">JavaScript Developer</p>
+                        <p class="text-gray-600">New York, NY • Full-time • $130,000 - $170,00</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Build enterprise applications with JavaScript and modern frameworks. We
+                            offer competitive compensation, health insurance, and professional development
+                            opportunities.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 07 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">StartupXYZ</p>
+                        <p class="text-gray-600">Full Stack Engineer</p>
+                        <p class="text-gray-600">Remote • Full-time • $120,000 - $160,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">Join our fast-growing startup and work on our core platform. Experience
+                            with Node.js and React required. Great benefits and equity package included.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- === card - 08 ===  -->
+            <div class="card flex justify-between shadow rounded p-5">
+
+                <!-- === info part == -->
+                <div class="space-y-4">
+                    <div class="space-y-1">
+                        <p class="font-bold text-xl">TechCorp Industries</p>
+                        <p class="text-gray-600">Senior Frontend Developer</p>
+                        <p class="text-gray-600">San Francisco, CA • Full-time • $130,000 - $175,000</p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="text-gray-600">We are looking for an experienced Frontend Developer to build scalable
+                            web applications using React and TypeScript. You will work with a talented team on
+                            cutting-edge projects.</p>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button
+                            class="interview-btn uppercase border border-green-700 p-2 text-green-600 font-medium rounded px-4 py-2">Interview</button>
+                        <button
+                            class="rejected-btn uppercase border border-red-700 p-2 text-red-600 font-medium rounded px-4 py-2">Rejected</button>
+
+                    </div>
+                </div>
+                <!-- == dlt part == -->
+                <div>
+                    <div class=" rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
 
     <script src="./script/tracker.js"></script>
 </body>
