@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment 04</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="assets/b.webp" type="image/x-icon"> -->
 
     <!-- === tailwind Csss ==== -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -22,7 +22,6 @@
         }
     </style>
 
-    <link rel="stylesheet" href="tailwind.init.css">
 </head>
 
 <body class="mx-auto bg-[#F8FAFC] w-[80%]">
@@ -33,41 +32,42 @@
         <div class="dashboard-card-container grid grid-cols-3 gap-4">
             <div class="dashboard-card rounded-2xl shadow  p-5">
                 <p>Total</p>
-                <h1 class="text-black text-2xl font-bold" id="total-count">0</h1>
+                <h1 class="text-black text-2xl font-bold" id="stat-total">0</h1>
             </div>
             <div class="dashboard-card rounded-2xl shadow p-5">
                 <p>Interview</p>
-                <h1 class="text-green-800 text-2xl font-bold" id="interview-count">0</h1>
+                <h1 class="text-green-800 text-2xl font-bold" id="stat-interview">0</h1>
             </div>
             <div class="dashboard-card rounded-2xl shadow p-5">
                 <p>Rejected</p>
-                <h1 class="text-red-800 text-2xl font-bold" id="rejected-count">0</h1>
+                <h1 class="text-red-800 text-2xl font-bold" id="stat-rejected">0</h1>
             </div>
         </div>
     </header>
 
-    <main id="main" class="main-container mx-auto space-y-5">
+    <main id="jobs-container" class="jobs-container mx-auto space-y-5">
 
         <!-- === availble counter === -->
         <div class="counter-head flex items-center justify-between mb-6">
             <h1 class="text-xl font-bold text-black">Available Jobs</h1>
-            <p>8 Jobs</p>
+            <p><span id="availble">8</span> Jobs</p>
         </div>
 
         <!-- ===== toggle button section ==== -->
         <div class="counter-btn-container flex gap-4 items-center">
-            <button id="total-filter-btn"     onclick="toggleStyle('total-filter-btn')" class="py-2 px-9 shadow rounded-sm text-white bg-blue-500">All</button>
-            <button id="interview-filter-btn" onclick="toggleStyle('interview-filter-btn')" class="py-2 px-4 shadow rounded-sm text-gray-600">Interview</button>
-            <button id="rejected-filter-btn"  onclick="toggleStyle('rejected-filter-btn')"  class="py-2 px-4 shadow rounded-sm text-gray-600">Rejected</button>
+            <button id="tab-all" onclick="switchTab('all')"
+                class="py-2 px-9 shadow rounded-sm text-gray-600 ">All</button>
+            <button id="tab-interview" onclick="switchTab('interview')"
+                class="py-2 px-4 shadow rounded-sm text-gray-600">Interview</button>
+            <button id="tab-rejected" onclick="switchTab('rejected')"
+                class="py-2 px-4 shadow rounded-sm text-gray-600">Rejected</button>
         </div>
 
-        <!-- ==== Filtered Section === -->
-        <section id="interview-section">
 
-        </section>
+
 
         <!-- ===== Allcards Section ==== -->
-        <section id="all-cards" class="space-y-6 mb-14">
+        <section id="all-container" class="hidden space-y-6 mb-14">
 
 
             <!-- === card - 01===  -->
@@ -76,14 +76,15 @@
                 <!-- === info part == -->
                 <div class="space-y-4">
                     <div class="space-y-1">
-                        <p class="font-bold text-xl">Mobile First Corp</p>
-                        <p class="text-gray-600">React Native Developer</p>
-                        <p class="text-gray-600">Remote • Full-time • $130,000 - $175,000</p>
+                        <p class="work-name font-bold text-xl">Mobile First Corp</p>
+                        <p class="post-name text-gray-600">React Native Developer</p>
+                        <p class="sallery text-gray-600">Remote • Full-time • $130,000 - $175,000</p>
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
-                        <p class="text-gray-600">Build cross-platform mobile applications using React Native. Work on
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <p class="description text-gray-600">Build cross-platform mobile applications using React
+                            Native. Work on
                             products used
                             by millions of users worldwide.</p>
                     </div>
@@ -98,8 +99,8 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
-                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    <div class="delete rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[15px] pointer-events-none" alt="">
                     </div>
                 </div>
             </div>
@@ -116,7 +117,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">Create stunning web experiences for high-profile clients. Must have
                             portfolio and experience with modern web design trends.</p>
                     </div>
@@ -131,7 +132,7 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
+                    <div class="delete rounded-full p-2 border border-gray-300">
                         <img src="./assets/Trash.png" class="w-[15px]" alt="">
                     </div>
                 </div>
@@ -149,7 +150,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">Transform complex data into compelling visualizations. Required skills:
                             D3.js, React, and strong analytical thinking.</p>
                     </div>
@@ -164,8 +165,8 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
-                        <img src="./assets/Trash.png" class="w-[15px]" alt="">
+                    <div class="delete rounded-full p-2 border border-gray-300">
+                        <img src="./assets/Trash.png" class="w-[80%]" alt="">
                     </div>
                 </div>
             </div>
@@ -182,7 +183,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">Design and maintain scalable backend systems using Python and AWS. Work
                             with modern DevOps practices and cloud infrastructure.</p>
                     </div>
@@ -197,7 +198,7 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
+                    <div class="delete rounded-full p-2 border border-gray-300">
                         <img src="./assets/Trash.png" class="w-[15px]" alt="">
                     </div>
                 </div>
@@ -215,7 +216,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">Create beautiful and functional user interfaces for our suite of
                             products. Strong design skills and frontend development expertise required.</p>
                     </div>
@@ -230,7 +231,7 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
+                    <div class="delete rounded-full p-2 border border-gray-300">
                         <img src="./assets/Trash.png" class="w-[15px]" alt="">
                     </div>
                 </div>
@@ -248,7 +249,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">Build enterprise applications with JavaScript and modern frameworks. We
                             offer competitive compensation, health insurance, and professional development
                             opportunities.</p>
@@ -264,7 +265,7 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
+                    <div class="delete rounded-full p-2 border border-gray-300">
                         <img src="./assets/Trash.png" class="w-[15px]" alt="">
                     </div>
                 </div>
@@ -282,7 +283,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">Join our fast-growing startup and work on our core platform. Experience
                             with Node.js and React required. Great benefits and equity package included.</p>
                     </div>
@@ -297,7 +298,7 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
+                    <div class="delete rounded-full p-2 border border-gray-300">
                         <img src="./assets/Trash.png" class="w-[15px]" alt="">
                     </div>
                 </div>
@@ -315,7 +316,7 @@
                     </div>
 
                     <div class="space-y-1">
-                        <button class="uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
+                        <button class="status uppercase rounded font-medium px-4 py-2 bg-blue-100">Not Applied</button>
                         <p class="text-gray-600">We are looking for an experienced Frontend Developer to build scalable
                             web applications using React and TypeScript. You will work with a talented team on
                             cutting-edge projects.</p>
@@ -331,7 +332,7 @@
                 </div>
                 <!-- == dlt part == -->
                 <div>
-                    <div class=" rounded-full p-2 border border-gray-300">
+                    <div class="delete rounded-full p-2 border border-gray-300">
                         <img src="./assets/Trash.png" class="w-[15px]" alt="">
                     </div>
                 </div>
@@ -339,9 +340,25 @@
 
         </section>
 
+        <!-- ==== Filtered Section === -->
+        <section id="interview-container" class="hidden">
+            <!-- Interview section -->
+        </section>
+        <section id="rejected-container" class="hidden">
+            <!-- Rejected section -->
+        </section>
+
+        <!-- empty section -->
+        <div id="empty-state" class=" flex flex-col items-center justify-center mx-auto gap-3 mb-6 mt-7 text-center ">
+            <img src="./assets/jobs.png" alt="">
+            <p class="text-lg font-bold text-gray-700">No jobs available</p>
+            <p class="text-gray-600">Check back soon for new job opportunities</p>
+        </div>
+
+
     </main>
 
-    <script src="./script/tracker.js"></script>
+    <script src="tracker.js"></script>
 </body>
 
 </html>
