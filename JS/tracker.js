@@ -98,6 +98,8 @@ document.getElementById("jobs-container").addEventListener('click', function (ev
     // console.log(clickElement.parentNode.parentNode.parentNode);
     const card = clickElement.closest(".card");
     // console.log(card);
+    if (!card) return;   // 👈 শুধু এইটা 
+    
     const status = card.querySelector(".status");
     const parent = card.parentNode;
 
